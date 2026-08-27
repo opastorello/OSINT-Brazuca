@@ -14,6 +14,9 @@ Uso:
 URLs de exemplo (com {VALOR}, SEU_ALVO, exemplo, zeros) são rotuladas como
 "modelo" e não são requisitadas.
 
+Para confirmar em navegador real as URLs "bloqueio" e "offline", passe o CSV
+gerado aqui ao tools/confirmar_links.py.
+
 Sem dependências além do Python 3.
 """
 

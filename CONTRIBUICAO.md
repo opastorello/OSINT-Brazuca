@@ -249,9 +249,12 @@ git config core.hooksPath tools/hooks
 python3 tools/validar_docs.py --avisos   # lista URLs repetidas em mais de uma fonte e URLs em http://
 python3 tools/checar_links.py            # testa todas as URLs do catálogo e resume ok/redirect/bloqueio/offline
 python3 tools/checar_links.py --filtro detran --csv links.csv
+python3 tools/confirmar_links.py links.csv --csv confirmados.csv   # segunda passada, em navegador real
 ```
 
-Esses avisos não bloqueiam o commit: URL repetida pode ser legítima (a mesma consulta em duas categorias) e muitos sites só existem em `http://`. Sites `.gov.br` costumam bloquear robôs (`bloqueio` = 401/403/405/429/503), então confira no navegador antes de reportar um link como quebrado.
+Esses avisos não bloqueiam o commit: URL repetida pode ser legítima (a mesma consulta em duas categorias) e muitos sites só existem em `http://`.
+
+Sites `.gov.br` costumam bloquear robôs (`bloqueio` = 401/403/405/429/503). O `confirmar_links.py` reabre só as URLs `bloqueio` e `offline` no Camoufox (Firefox com anti-detecção) e registra o status real, o título e a URL final; o que continuar `offline` ou `erro` ali é candidato forte a `[LINK QUEBRADO]`. Ele precisa do pacote `camoufox` (`pip install camoufox && python3 -m camoufox fetch`), que não é dependência do projeto: sem ele, o script avisa e sai.
 
 ---
 
